@@ -1,0 +1,1249 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Tesoro de la Escritura</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!-- ICONO DEL JUEGO -->
+  <link rel="icon" href="assets/icono.png" type="image/png">
+   <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	  <!-- HUD GLOBAL -->
+	<div class="hud-global">
+	  ⭐ Puntuación: <span id="puntajeUI">0</span> |
+	  🪙 Monedas: <span id="monedasUI">0</span>
+	</div> 
+	 <!-- 🎬 VIDEO FLOTANTE -->
+	<div id="videoBox" class="video-box">
+	<video id="videoGame" controls>
+	  <source id="videoSource" src="" type="video/mp4">
+	  <!-- <source src="assets/video_evidencia.mp4" type="video/mp4"> -->
+	  Tu navegador no soporta video.
+	</video>
+	<button id="btnToggleVideo" onclick="toggleVideo()">—</button>
+	</div>
+  <!-- ========================== -->
+  <!--       PANTALLA MENÚ        -->
+  <!-- ========================== -->
+  <div id="menu" class="screen active">
+    <div class="game-title">Bienvenidos a esta aventura!</div>
+	<div class="game-title">La busqueda del tesoro de la escritura</div>
+    <button id="btnIniciar">Iniciar</button>
+  </div>
+  <!-- ========================== -->
+  <!--   PANTALLA SELECCIÓN PJ    -->
+  <!-- ========================== -->
+  <div id="selectScreen" class="screen">
+    <div class="subtitle">Selecciona un jugador:</div>
+    <div class="character-grid">
+      <div class="character" data-id="1">
+        <img src="assets/Primer_personaje.png" class="character-img">
+      </div>
+      <div class="character" data-id="2">
+        <img src="assets/Segundo_personaje.png" class="character-img">
+      </div>
+      <div class="character" data-id="3">
+        <img src="assets/Tercer_personaje.png" class="character-img">
+      </div>
+    </div>
+    <button id="btnSalir">Salir</button>
+  </div>
+  <!-- ========================== -->
+  <!--       TERCERA PANTALLA     -->
+  <!-- ========================== -->
+  <div id="islandScreen" class="screen">
+
+    <div class="top-ui">
+      <!-- <div class="coins">🪙 <span id="coinCount">0</span></div> -->
+      <!--<div class="progress-bar">
+        <div id="progressFill"></div>
+      </div>-->
+    </div>
+
+    <div class="island-container">
+      <img src="assets/isla_tropical.png" class="island-bg">
+
+      <!-- ISLA 1 -->
+      <div class="island spot1" data-spot="1">
+	    <img src="assets/cofre_tesoro.png" class="cofre-img">
+	  </div>
+
+      <!-- ISLA 2 -->
+      <div class="island spot2" data-spot="2">
+	    <img src="assets/cofre_tesoro.png" class="cofre-img">
+	  </div>
+
+      <!-- ISLA 3 -->
+      <div class="island spot3" data-spot="3">
+	    <img src="assets/cofre_tesoro.png" class="cofre-img">
+	  </div>
+    </div>
+	  <!-- Nuevo botón -->
+	<button id="btnVolver" class="back-button">Volver al inicio</button>
+	
+  </div>
+  
+  <!-- ========================== -->
+<!--       CUARTA PANTALLA      -->
+<!-- ========================== -->
+ <div id="levelScreen" class="screen">
+
+  <div class="title">Nivel 1: Isla vocabulario</div>
+
+  <!-- Barra de progreso -->
+  <div class="progress-bar level-progress">
+    <div id="levelProgressFill"></div>
+  </div>
+
+  <h1 class="level-title">UNIR IMAGEN Y PALABRA</h1>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="level-layout">
+
+    <!-- COLUMNA IZQUIERDA (IMÁGENES) -->
+    <div class="level-column left-column">
+      <img src="assets/amigos.png" class="level-img" data-word="AMIGO">
+      <img src="assets/madre.png" class="level-img" data-word="MADRE">
+      <img src="assets/padre.png" class="level-img" data-word="PADRE">
+    </div>
+
+    <!-- COLUMNA DERECHA (PALABRAS) -->
+    <div class="level-column right-column">
+	  <div class="level-word" draggable="true" data-word="MADRE">MADRE</div>
+      <div class="level-word" draggable="true" data-word="AMIGO">AMIGO</div>     
+      <div class="level-word" draggable="true" data-word="PADRE">PADRE</div>
+    </div>
+
+  </div>
+
+  <!-- MENSAJE -->
+  <div id="levelMessage"></div>
+
+  <!-- BOTÓN -->
+  <button id="btnLevelBack" class="back-button">Volver</button>
+
+</div>
+
+
+	<!-- ============================ -->
+	<!--        PANTALLA 5           -->
+	<!-- ============================ -->
+ <div id="matchScreen" class="screen">
+  <h1 class="match-title">UNIR IMAGEN Y PALABRA</h1>
+  <div class="match-layout">
+    <!-- COLUMNA IZQUIERDA: IMÁGENES -->
+    <div class="match-column left-column">
+      <img src="assets/mirar.png" class="match-img" data-word="MIRAR">
+      <img src="assets/hablar.png" class="match-img" data-word="HABLAR">
+      <img src="assets/saltar.png" class="match-img" data-word="SALTAR">
+    </div>
+    <!-- COLUMNA DERECHA: PALABRAS -->
+    <div class="match-column right-column">
+      <div class="match-word" draggable="true" data-word="MIRAR">MIRAR</div>
+      <div class="match-word" draggable="true" data-word="HABLAR">HABLAR</div>
+      <div class="match-word" draggable="true" data-word="SALTAR">SALTAR</div>
+    </div>
+  </div>
+  <div id="matchMessage"></div>
+  <svg id="matchLines"></svg>
+</div>
+	<!-- ============================ -->
+	<!--        PANTALLA 6           -->
+	<!-- ============================ -->
+ <div id="matchScreen2" class="screen">
+  <h1 class="match-title">UNIR IMAGEN Y PALABRA</h1>
+  <div class="match-layout">
+    <!-- COLUMNA IZQUIERDA: IMÁGENES -->
+    <div class="match-column left-column">
+      <img src="assets/silla.png" class="match-img" data-word="SILLA">
+      <img src="assets/celular.png" class="match-img" data-word="CELULAR">
+      <img src="assets/ventana.png" class="match-img" data-word="VENTANA">
+    </div>
+    <!-- COLUMNA DERECHA: PALABRAS -->
+    <div class="match-column right-column">
+      <div class="match-word2" draggable="true" data-word="SILLA">SILLA</div>
+      <div class="match-word2" draggable="true" data-word="CELULAR">CELULAR</div>
+      <div class="match-word2" draggable="true" data-word="VENTANA">VENTANA</div>
+    </div>
+  </div>
+  <div id="matchMessage2"></div>
+  <svg id="matchLines2"></svg>
+</div>
+<!-- ========================= -->
+<!--        PANTALLA 7        -->
+<!-- ========================= -->
+<div id="screen7" class="screen">
+    <div class="title pantalla7-title">CLASIFICAR EN COFRES</div>
+    <div class="cofre-container">
+        <div class="cofre-box">
+            <div class="cofre-label">Personas</div>
+            <img src="assets/cofre_diamantes.png" class="cofre-img" data-type="persona">
+        </div>
+        <div class="cofre-box">
+            <div class="cofre-label">Acciones</div>
+            <img src="assets/cofre_diamantes.png" class="cofre-img" data-type="accion">
+        </div>
+        <div class="cofre-box">
+            <div class="cofre-label">Objetos</div>
+            <img src="assets/cofre_diamantes.png" class="cofre-img" data-type="objeto">
+        </div>
+    </div>
+
+    <div class="word-zone">
+        <div class="word-item" draggable="true" data-type="persona">Hombre</div>
+        <div class="word-item" draggable="true" data-type="persona">Mujer</div>
+        <div class="word-item" draggable="true" data-type="persona">Niña</div>
+
+        <div class="word-item" draggable="true" data-type="accion">Leer</div>
+        <div class="word-item" draggable="true" data-type="accion">Dormir</div>
+        <div class="word-item" draggable="true" data-type="accion">Abrir</div>
+        <div class="word-item" draggable="true" data-type="accion">Correr</div>
+
+        <div class="word-item" draggable="true" data-type="objeto">Cuaderno</div>
+        <div class="word-item" draggable="true" data-type="objeto">Mochila</div>
+        <div class="word-item" draggable="true" data-type="objeto">Libro</div>
+    </div>
+    <div id="mensajePantalla7"></div>
+
+</div>
+<!-- ============================= -->
+<!--        PANTALLA 8            -->
+<!-- ============================= -->
+<div id="screen8" class="screen">
+    <div class="title pantalla8-title">ROMPECABEZA DE SÍLABAS</div>
+    <div id="silabasMsg"></div>
+    <div class="p8-row">
+        <!-- GATO -->
+        <div class="p8-item">
+            <img src="assets/gato.png" class="p8-img">
+            <div class="p8-drop" data-word="gato"></div>
+        </div>
+        <!-- HADA -->
+        <div class="p8-item">
+            <img src="assets/hada.png" class="p8-img">
+            <div class="p8-drop" data-word="hada"></div>
+        </div>
+        <!-- BEBÉ -->
+        <div class="p8-item">
+            <img src="assets/bebe.png" class="p8-img">
+            <div class="p8-drop" data-word="bebe"></div>
+        </div>
+        <!-- CAMA -->
+        <div class="p8-item">
+            <img src="assets/cama.png" class="p8-img">
+            <div class="p8-drop" data-word="cama"></div>
+        </div>
+    </div>
+
+    <div class="p8-syllables">
+
+        <!-- GATO -->
+        <div class="p8-syl" draggable="true" data-syll="ga">ga</div>
+        <div class="p8-syl" draggable="true" data-syll="to">to</div>
+
+        <!-- HADA -->
+        <div class="p8-syl" draggable="true" data-syll="ha">ha</div>
+        <div class="p8-syl" draggable="true" data-syll="da">da</div>
+
+        <!-- BEBÉ -->
+        <div class="p8-syl" draggable="true" data-syll="be">be</div>
+        <div class="p8-syl" draggable="true" data-syll="bé">bé</div>
+
+        <!-- CAMA -->
+        <div class="p8-syl" draggable="true" data-syll="ca">Ca</div>
+        <div class="p8-syl" draggable="true" data-syll="ma">ma</div>
+
+    </div>
+
+</div>
+	<!-- ============================= -->
+	<!--        PANTALLA 9            -->
+	<!-- ============================= -->
+ <div id="screen9" class="screen">
+    <div class="title pantalla9-title">ROMPECABEZA DE SÍLABAS</div>
+
+    <div id="silabasMsg9"></div>
+
+    <div class="p9-row">
+
+        <!-- hoja -->
+        <div class="p9-item">
+            <img src="assets/hoja.png" class="p9-img">
+            <div class="p9-drop" data-word="hoja"></div>
+        </div>
+
+        <!-- jugo -->
+        <div class="p9-item">
+            <img src="assets/jugo.png" class="p9-img">
+            <div class="p9-drop" data-word="jugo"></div>
+        </div>
+
+        <!-- cuna -->
+        <div class="p9-item">
+            <img src="assets/cuna.png" class="p9-img">
+            <div class="p9-drop" data-word="cuna"></div>
+        </div>
+
+        <!-- CAMA -->
+        <div class="p9-item">
+            <img src="assets/dona.png" class="p9-img">
+            <div class="p9-drop" data-word="dona"></div>
+        </div>
+
+    </div>
+
+    <div class="p9-syllables">
+
+        <!-- hoja -->
+        <div class="p9-syl" draggable="true" data-syll="ho">ho</div>
+        <div class="p9-syl" draggable="true" data-syll="ja">ja</div>
+
+        <!-- jugo -->
+        <div class="p9-syl" draggable="true" data-syll="ju">ju</div>
+        <div class="p9-syl" draggable="true" data-syll="go">go</div>
+
+        <!-- cuna -->
+        <div class="p9-syl" draggable="true" data-syll="cu">cu</div>
+        <div class="p9-syl" draggable="true" data-syll="na">na</div>
+
+        <!-- dona -->
+        <div class="p9-syl" draggable="true" data-syll="do">do</div>
+        <div class="p9-syl" draggable="true" data-syll="na">na</div>
+    </div>
+</div>
+	<!-- ===================================== -->
+	<!--        PANTALLA 10 - SELECCIÓN        -->
+	<!-- ===================================== -->
+<div id="screen10" class="screen">
+  <h2 class="game-title">SELECCIONA LA PALABRA CORRECTA</h2>
+
+  <div class="question-box">
+    <img src="assets/escribir.png" alt="Imagen acción" class="question-img">
+  </div>
+
+  <div class="options">
+    <button class="option-btn" data-correct="true">Escribir</button>
+    <button class="option-btn">Correr</button>
+    <button class="option-btn">Dormir</button>
+  </div>
+
+  <div id="msg10" class="game-message"></div>
+
+</div>
+
+<!-- ===================================== -->
+<!--        PANTALLA 11 - FRASES DnD       -->
+<!-- ===================================== -->
+<div id="screen11" class="screen">
+  <div class="phrase-box">
+    <h2 class="phrase-title">Completa la frase:</h2>
+
+    <img src="assets/nina-columpio.png" class="phrase-img">
+
+    <p class="phrase-text">
+      La niña 
+      <span id="drop11" class="drop-blank" data-answer="juega"></span>
+      en el columpio
+    </p>
+  </div>
+
+  <div class="phrase-options">
+    <div class="phrase-drag" draggable="true" data-word="juega">Juega</div>
+    <div class="phrase-drag" draggable="true" data-word="mesa">Mesa</div>
+    <div class="phrase-drag" draggable="true" data-word="rapido">Rápido</div>
+  </div>
+
+  <div id="msg11" class="game-message"></div>
+
+</div>
+
+	<!-- ========================================
+		 PANTALLA 12 - ORDENA LA ORACIÓN
+	======================================== -->
+<div id="screen12" class="screen">	
+  <h2 class="titulo">Ordena la oración</h2>
+
+  <div class="panel-blanco">
+    <img src="assets/mujer_corriendo.png" class="img-accion" alt="Mujer corriendo">
+
+    <div id="oracionDrop" class="oracion-drop"></div>
+
+    <p id="msg12" class="mensaje"></p>
+  </div>
+
+  <div class="palabras">
+    <div class="word" draggable="true" data-word="corre">corre</div>
+    <div class="word" draggable="true" data-word="ella">ella</div>
+    <div class="word" draggable="true" data-word="parque">parque</div>
+    <div class="word" draggable="true" data-word="en">en</div>
+    <div class="word" draggable="true" data-word="el">el</div>
+  </div>
+
+</div>
+
+	<!-- ========================================
+		 PANTALLA 13 - ORDENA LA ORACIÓN
+	======================================== -->
+<div id="screen13" class="screen">
+  <h2 class="titulo">Ordena la oración</h2>
+
+  <div class="panel-blanco">
+    <img src="assets/joven_pc.png" class="img-accion" alt="Joven con portatil">
+
+    <div id="oracion2Drop" class="oracion2-drop"></div>
+
+    <p id="msg13" class="mensaje"></p>
+  </div>
+
+  <div class="palabras2">
+    <div class="word" draggable="true" data-word="computadora">computadora</div>
+    <div class="word" draggable="true" data-word="la">la</div>
+	<div class="word" draggable="true" data-word="en">en</div>
+	<div class="word" draggable="true" data-word="yo">yo</div>
+	<div class="word" draggable="true" data-word="el">el</div>
+    <div class="word" draggable="true" data-word="parque">parque</div>
+    <div class="word" draggable="true" data-word="uso">uso</div>
+  </div>
+
+</div>
+<!-- ========================== -->
+<!--       PANTALLA 14  
+<div id="screen14" class="screen">
+
+  <div class="panel-blanco historia-panel">
+    <h1>Ordena la historia</h1>
+
+    <img src="assets/mapa_historia.png" class="img-historia">
+
+    <div class="palabras-historia">
+      <div class="word">Tesoro</div>
+      <div class="word">Buscar</div>
+      <div class="word">Un</div>
+    </div>
+  </div>
+
+</div>        -->
+<!-- ========================== -->
+<div id="screen14" class="screen">
+  <div class="title">Nivel 2:Misión Puente de la Coherencia</div>
+  <div class="panel-blanco historia-panel">
+    <h1>Ordena la historia</h1>
+    <img src="assets/mapa_historia.png" class="img-historia">
+
+    <!-- CAJONES (slots) -->
+    <div class="slots-historia">
+      <div class="slot" data-index="0"></div>
+      <div class="slot" data-index="1"></div>
+      <div class="slot" data-index="2"></div>
+    </div>
+
+    <!-- PALABRAS -->
+    <div class="palabras-historia">
+      <div class="word" draggable="true" data-word="Un">Un</div>
+      <div class="word" draggable="true" data-word="Tesoro">Tesoro</div>
+	  <div class="word" draggable="true" data-word="Buscar">Buscar</div>
+    </div>
+
+    <!-- MENSAJE -->
+    <div id="msg14"></div>
+
+  </div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 15          -->
+<!-- ========================== -->
+<div id="screen15" class="screen">
+  <div class="panel-blanco historia-panel">
+
+    <h1>Ordena la historia</h1>
+
+    <img src="assets/pergamino.png" class="img-historia">
+
+    <!-- Zona donde se arma la frase -->
+    <div id="drop15" class="drop-frase">
+      Arrastra las palabras aquí
+    </div>
+
+    <!-- Mensaje -->
+    <div id="msg15" class="mensaje"></div>
+
+    <!-- Palabras -->
+    <div class="palabras-historia">
+      <div class="word" draggable="true" data-word="escribir">Escribir</div>
+      <div class="word" draggable="true" data-word="en">En</div>
+      <div class="word" draggable="true" data-word="el">El</div>
+      <div class="word" draggable="true" data-word="pergamino">Pergamino</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 16          -->
+<!-- ========================== -->
+<div id="screen16" class="screen">
+  <div class="panel-blanco asociar-panel"> 
+
+    <h1>¿Qué pasa primero, después y al final?</h1>
+
+    <!-- IMÁGENES -->
+    <div class="imagenes-secuencia">
+
+      <div class="imagen-item" data-answer="mirar el mapa">
+        <img src="assets/mirar_mapa.png">
+        <div class="drop-zona"></div>
+      </div>
+
+      <div class="imagen-item" data-answer="caminar">
+        <img src="assets/caminar.png">
+        <div class="drop-zona"></div>
+      </div>
+
+      <div class="imagen-item" data-answer="abrir el cofre">
+        <img src="assets/abrir_cofre.png">
+        <div class="drop-zona"></div>
+      </div>
+
+    </div>
+
+    <!-- MENSAJE -->
+    <div id="msg16" class="mensaje"></div>
+
+    <!-- FRASES -->
+    <div class="frases-secuencia">
+      <div class="frase" draggable="true" data-frase="abrir el cofre">Abrir el cofre</div>
+      <div class="frase" draggable="true" data-frase="mirar el mapa">Mirar el mapa</div>
+      <div class="frase" draggable="true" data-frase="caminar">Caminar</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 17          -->
+<!-- ========================== -->
+<div id="screen17" class="screen">
+ 
+  <div class="panel-blanco asociar-panel">
+
+    <h1>¿Qué pasa primero, después y al final?</h1>
+
+    <!-- IMÁGENES -->
+    <div class="imagenes-secuencia">
+
+      <!-- PENSAR -->
+      <div class="imagen-item" data-answer="pensar">
+        <img src="assets/pensar.png">
+        <div class="drop-zona"></div>
+      </div>
+
+      <!-- ESCRIBIR -->
+      <div class="imagen-item" data-answer="escribir">
+        <img src="assets/escribiendo.png">
+        <div class="drop-zona"></div>
+      </div>
+
+      <!-- REVISAR -->
+      <div class="imagen-item" data-answer="revisar">
+        <img src="assets/revisar.png">
+        <div class="drop-zona"></div>
+      </div>
+
+    </div>
+
+    <!-- MENSAJE -->
+    <div id="msg17" class="mensaje"></div>
+
+    <!-- PALABRAS -->
+    <div class="frases-secuencia">
+      <div class="frase" draggable="true" data-frase="revisar">Revisar</div>
+      <div class="frase" draggable="true" data-frase="pensar">Pensar</div>
+      <div class="frase" draggable="true" data-frase="escribir">Escribir</div>
+    </div>
+
+  </div>
+
+</div>
+<!-- ========================== -->
+<!--       PANTALLA 18          -->
+<!-- ========================== -->
+<div id="screen18" class="screen">
+  <div class="panel-blanco asociar-panel">
+
+    <h1>¿Qué pasa primero, después y al final?</h1>
+
+    <!-- IMÁGENES -->
+    <div class="imagenes-secuencia">
+
+      <!-- SALUDAR -->
+      <div class="imagen-item" data-answer="saludar">
+        <img src="assets/saludar.png">
+        <div class="drop-zona"></div>
+      </div>
+
+      <!-- CONVERSAR -->
+      <div class="imagen-item" data-answer="conversar">
+        <img src="assets/conversar.png">
+        <div class="drop-zona"></div>
+      </div>
+
+      <!-- DESPEDIRSE -->
+      <div class="imagen-item" data-answer="despedirse">
+        <img src="assets/despedirse.png">
+        <div class="drop-zona"></div>
+      </div>
+
+    </div>
+
+    <!-- MENSAJE -->
+    <div id="msg18" class="mensaje"></div>
+
+    <!-- PALABRAS -->
+    <div class="frases-secuencia">
+      <div class="frase" draggable="true" data-frase="despedirse">Despedirse</div>
+      <div class="frase" draggable="true" data-frase="saludar">Saludar</div>
+      <div class="frase" draggable="true" data-frase="conversar">Conversar</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 19          -->
+<!-- ========================== -->
+<div id="screen19" class="screen">
+  <h1 class="titulo-unir">Unir ideas</h1>
+
+  <div class="unir-contenedor">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="columna izquierda">
+
+      <div class="item unir-item" data-id="pista">
+        <img src="assets/pista.png">
+        <p>El niño encontró una pista</p>
+      </div>
+
+      <div class="item unir-item" data-id="mapa">
+        <img src="assets/mapa.png">
+        <p>La joven siguió el mapa</p>
+      </div>
+
+      <div class="item unir-item" data-id="mensaje">
+        <img src="assets/mensaje.png">
+        <p>Escribió el mensaje</p>
+      </div>
+
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div class="columna derecha">
+
+      <div class="item unir-destino" data-id="mapa">
+        <img src="assets/tesoro.png">
+        <p>Encontró el tesoro</p>
+      </div>
+
+      <div class="item unir-destino" data-id="mensaje">
+        <img src="assets/revisartext.png">
+        <p>Revisó el texto</p>
+      </div>
+
+      <div class="item unir-destino" data-id="pista">
+        <img src="assets/cofre.png">
+        <p>Abrió el cofre</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="msg19" class="mensaje"></div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 20          -->
+<!-- ========================== -->
+<div id="screen20" class="screen">	
+  <div class="panel-blanco">
+
+    <h1>Elige el conector</h1>
+
+    <img src="assets/conector.png" class="img-conector">
+
+    <p class="frase">
+      Reescribí el texto
+      <span id="drop20" class="drop-zone">______</span>
+      tenía errores
+    </p>
+
+    <div class="opciones-conector">
+      <div class="word" draggable="true" data-word="luego">Luego</div>
+      <div class="word" draggable="true" data-word="finalmente">Finalmente</div>
+      <div class="word" draggable="true" data-word="porque">Porque</div>
+    </div>
+
+    <div id="msg20" class="mensaje"></div>
+
+  </div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 21          -->
+<!-- ========================== -->
+<div id="screen21" class="screen">
+
+  <div class="panel-blanco">
+
+    <h1>Elige el conector</h1>
+
+    <img src="assets/joven_analisis.png" class="img-conector">
+
+    <p class="frase">
+      El contenido es pertinente,
+      <span id="drop21" class="drop-zone">______</span>
+      necesita ajustes
+    </p>
+
+    <div class="opciones-conector">
+      <div class="word" draggable="true" data-word="Asi mismo">Asi mismo</div>
+      <div class="word" draggable="true" data-word="pero">pero</div>
+      <div class="word" draggable="true" data-word="porque">Porque</div>
+    </div>
+
+    <div id="msg21" class="mensaje"></div>
+
+  </div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 22          -->
+<!-- ========================== -->
+<div id="screen22" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Elige el conector</h1>
+
+    <img src="assets/estudiantes_clase.png" class="img-conector">
+
+    <p class="frase">
+      El estudiante presento el trabajo;
+      <span id="drop22" class="drop-zone">______</span>
+      participo activamente en clase.
+    </p>
+
+    <div class="opciones-conector">
+      <div class="word" draggable="true" data-word="Ademas">Ademas</div>
+      <div class="word" draggable="true" data-word="En cambio">En cambio</div>
+      <div class="word" draggable="true" data-word="Por lo tanto">Por lo tanto</div>
+    </div>
+
+    <div id="msg22" class="mensaje"></div>
+
+  </div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 23          -->
+<!-- ========================== --> 
+<div id="screen23" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Elige el conector</h1>
+
+    <img src="assets/escolar.png" class="img-conector">
+
+    <p class="frase">
+      Hubo baja asistencia;
+      <span id="drop23" class="drop-zone">______</span>
+      ,se reprogramó la sesión.
+    </p>
+
+    <div class="opciones-conector">
+      <div class="word" draggable="true" data-word="Es decir">Es decir</div>
+      <div class="word" draggable="true" data-word="Luego">Luego</div>
+      <div class="word" draggable="true" data-word="Por eso">Por eso</div>
+    </div>
+
+    <div id="msg23" class="mensaje"></div>
+
+  </div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 24          -->
+<!-- ========================== -->
+<div id="screen24" class="screen">
+  <div class="panel-blanco">
+    <h1>Elige el conector</h1>
+    <img src="assets/joven_mensaje.png" class="img-conector">
+    <p class="frase">
+      <span id="drop24" class="drop-zone">______</span>
+      ,se identificaron las necesidades del grupo
+    </p>
+    <div class="opciones-conector">
+      <div class="word" draggable="true" data-word="Tambien">Tambien</div>
+      <div class="word" draggable="true" data-word="En primer lugar">En primer lugar</div>
+      <div class="word" draggable="true" data-word="Aunque">Aunque</div>
+    </div>
+    <div id="msg24" class="mensaje"></div>
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 25          -->
+<!-- ========================== -->
+<div id="screen25" class="screen">
+
+  <div class="panel-blanco">
+    <h1>Elige el conector</h1>
+    <img src="assets/joven_escritor.png" class="img-conector">
+    <p class="frase">
+	  Se fortalecio la escritura; en 
+      <span id="drop25" class="drop-zone">______</span>
+       mejoro la expresion escrita
+    </p>
+    <div class="opciones-conector">
+      <div class="word" draggable="true" data-word="en cambio">en cambio</div>
+      <div class="word" draggable="true" data-word="sobre todo">sobre todo</div>
+      <div class="word" draggable="true" data-word="otras palabras">otras palabras</div>
+    </div>
+    <div id="msg25" class="mensaje"></div>
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 26          -->
+<!-- ========================== -->
+<div id="screen26" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Completa el párrafo visual</h1>
+
+    <div class="parrafo-visual">
+
+      <!-- IMAGEN 1 -->
+      <div class="bloque">
+        <img src="assets/mapa_tesoro.png" class="img-parrafo">
+        <p>Primero, encontré el mapa</p>
+      </div>
+
+      <!-- IMAGEN 2 -->
+      <div class="bloque">
+        <img src="assets/lupa.png" class="img-parrafo">
+        <p>
+          <input type="text" id="respuesta26" class="input-parrafo" placeholder="Escribe aquí">
+          seguí las pistas
+        </p>
+      </div>
+
+      <!-- IMAGEN 3 -->
+      <div class="bloque">
+        <img src="assets/pirata.png" class="img-parrafo">
+        <p>Finalmente, abrí el cofre</p>
+      </div>
+
+    </div>
+
+    <button id="btn26" class="btn-verificar">Verificar</button>
+
+    <div id="msg26" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 27          -->
+<!-- ========================== -->
+<div id="screen27" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Completa el párrafo visual</h1>
+
+    <div class="parrafo-visual">
+
+      <!-- IMAGEN 1 -->
+      <div class="bloque">
+        <img src="assets/docente.png" class="img-parrafo">
+        <p>El docente explico el tema</p>
+      </div>
+
+      <!-- IMAGEN 2 -->
+      <div class="bloque">
+        <img src="assets/grupo_jovenes.png" class="img-parrafo">
+        <p>
+          <input type="text" id="respuesta27" class="input-parrafo" placeholder="Escribe aquí">
+          resolvio las dudas del grupo
+        </p>
+      </div>
+    </div>
+
+    <button id="btn27" class="btn-verificar">Verificar</button>
+
+    <div id="msg27" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 28          -->
+<!-- ========================== -->
+<div id="screen28" class="screen">
+  <div class="title">Nivel 3:Misión Cueva del Texto</div>
+  <div class="panel-blanco">
+
+    <h1>Completa la historia</h1>
+
+    <div class="contenedor-historia">
+
+      <!-- INICIO -->
+      <div class="bloque">
+        <img src="assets/Llave.png" class="img-historia">
+        <p>Hoy encontré una <span class="drop28" data-correct="llave">______</span></p>
+        <h3>INICIO</h3>
+      </div>
+
+      <!-- DESARROLLO -->
+      <div class="bloque">
+        <img src="assets/chica-caminando.png" class="img-historia">
+        <p>Luego seguí <span class="drop28" data-correct="pistas">______</span></p>
+        <h3>DESARROLLO</h3>
+      </div>
+
+      <!-- FINAL -->
+      <div class="bloque">
+        <img src="assets/joyas-cofre.png" class="img-historia">
+        <p>Finalmente <span class="drop28" data-correct="abrí">______</span> el cofre</p>
+        <h3>FINAL</h3>
+      </div>
+
+    </div>
+
+    <!-- OPCIONES -->
+    <div class="opciones28">     
+      <div class="word28" draggable="true" data-word="pistas">pistas</div>
+      <div class="word28" draggable="true" data-word="abrí">abrí</div>
+	  <div class="word28" draggable="true" data-word="llave">llave</div>
+    </div>
+
+    <div id="msg28" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 29          -->
+<!-- ========================== -->
+<div id="screen29" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Completa la historia</h1>
+
+    <div class="contenedor-historia">
+
+      <!-- INICIO -->
+      <div class="bloque">
+        <img src="assets/computadora.png" class="img-historia1">
+        <p>El joven esta en su <span class="drop29" data-correct="computadora">______</span></p>
+        <h3>INICIO</h3>
+      </div>
+
+      <!-- DESARROLLO -->
+      <div class="bloque">
+        <img src="assets/examen.png" class="img-historia1">
+        <p>Estudiando para su <span class="drop29" data-correct="examen">______</span></p>
+        <h3>DESARROLLO</h3>
+      </div>
+
+      <!-- FINAL -->
+      <div class="bloque"> 
+        <img src="assets/graduacion.png" class="img-historia1">
+        <p>Finalmente logra<span class="drop29" data-correct="graduarse">______</span></p>
+        <h3>FINAL</h3>
+      </div>
+
+    </div>
+
+    <!-- OPCIONES -->
+    <div class="opciones29">     
+      <div class="word29" draggable="true" data-word="examen">examen</div>
+      <div class="word29" draggable="true" data-word="graduarse">graduarse</div>
+	  <div class="word29" draggable="true" data-word="computadora">computadora</div>
+    </div>
+
+    <div id="msg29" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 30          -->
+<!-- ========================== -->
+<div id="screen30" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Completa la frase</h1> 
+
+    <div class="contenedor-historia">
+
+      <!-- INICIO -->
+      <div class="bloque">
+        <img src="assets/parque.png" class="img-historia2">
+        <p>Busque la pista <span class="drop30" data-correct="en el parque">______</span></p>  
+      </div>
+    </div>
+
+    <!-- OPCIONES -->
+    <div class="opciones30">
+      <div class="word30" draggable="true" data-word="en la ruta">en la ruta</div>
+      <div class="word30" draggable="true" data-word="la selva">la selva</div>
+      <div class="word30" draggable="true" data-word="en el parque">en el parque</div>
+    </div>
+
+    <div id="msg30" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 31          -->
+<!-- ========================== -->
+<div id="screen31" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Completa la frase</h1> 
+
+    <div class="contenedor-historia">
+
+      <!-- INICIO -->
+      <div class="bloque">
+        <img src="assets/Cuaderno.png" class="img-historia3"> 
+        <p>Pensé la idea y escribí el texto <span class="drop31" data-correct="en el cuaderno">______</span></p>  
+      </div>
+    </div>
+
+    <!-- OPCIONES -->
+    <div class="opciones31">
+      <div class="word31" draggable="true" data-word="en la hoja">en la hoja</div>
+      <div class="word31" draggable="true" data-word="en el cuaderno">en el cuaderno</div>
+      <div class="word31" draggable="true" data-word="en el tablero">en el tablero</div>
+    </div>
+
+    <div id="msg31" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 32          -->
+<!-- ========================== -->
+<div id="screen32" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Completa el párrafo con conectores</h1>
+
+    <img src="assets/mesa_trabajo.png" class="img-parrafo">
+
+    <p class="parrafo">
+      
+      <input type="text" id="inp1" class="input-conector"> el joven llegó a su primer día de prácticas en la empresa.
+      <br><br>
+      <input type="text" id="inp2" class="input-conector"> habló con sus compañeros y 
+      <input type="text" id="inp3" class="input-conector"> empezó a aprender nuevas tareas.
+      <br><br>
+      <input type="text" id="inp4" class="input-conector"> se esforzó cada día y 
+      <input type="text" id="inp5" class="input-conector"> logró adaptarse al mundo laboral.
+    </p>
+
+    <button id="btn32" class="btn-verificar">Verificar</button>
+
+    <div id="msg32" class="mensaje"></div>
+
+  </div>
+
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 33          -->
+<!-- ========================== -->
+<div id="screen33" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Completa el párrafo con conectores</h1>
+
+    <img src="assets/red_social.png" class="img-parrafo">
+
+    <p class="texto-parrafo">
+      Las redes sociales cambiaron la comunicación entre las personas.
+      Muchos especialistas creen que es un cambio negativo,
+      <input type="text" id="p33_1" class="input-parrafo">,
+      ¿realmente es así?
+
+      Es real que antes las personas se comunicaban más de manera presencial que ahora.
+      <input type="text" id="p33_2" class="input-parrafo">,
+      las redes sociales introdujeron un cambio positivo,
+      <input type="text" id="p33_3" class="input-parrafo">
+      permiten que los usuarios puedan comunicarse sin importar la distancia.
+    </p>
+
+    <button onclick="verificar33()" class="btn-verificar">Verificar</button>
+
+    <div id="msg33" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 34          -->
+<!-- ========================== -->
+<div id="screen34" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Identifica el error en el párrafo</h1>
+
+    <img src="assets/joven_parque.png" class="img-parrafo">
+
+    <p class="texto-parrafo">
+      El joven salió al parque para respirar aire puro.<br>
+      Pensó en sus estudios y en las montañas.<br>
+      La bicicleta estaba rota y el examen era difícil.
+    </p>
+
+    <div class="opciones34">
+      <button class="btn-opcion" onclick="verificar34('ortografia')">
+        Error ortográfico
+      </button>
+
+      <button class="btn-opcion" onclick="verificar34('conectores')">
+        Faltan conectores
+      </button>
+	  
+	  <button class="btn-opcion" onclick="verificar34('logica')">
+        No hay secuencia lógica
+      </button>
+    </div>
+
+    <div id="msg34" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 35          -->
+<!-- ========================== -->
+<div id="screen35" class="screen">
+  <div class="panel-blanco">
+
+    <h1>Identifica el error en el párrafo</h1>
+
+    <img src="assets/ayuda_comunidad.png" class="img-parrafo">
+
+    <p class="texto-parrafo"> 
+      La joven quería ayudar a su comunidad.<br>
+      El celular sonó y la lluvia caía fuerte.<br>
+      El bus pasó rápido y el problema seguía igual.
+    </p>
+
+    <div class="opciones35">
+      <button class="btn35" onclick="verificar35('ortografia')">
+        Error ortográfico
+      </button>
+
+      <button class="btn35" onclick="verificar35('logica')">
+        No hay secuencia lógica
+      </button>
+
+      <button class="btn35" onclick="verificar35('conectores')">
+        Faltan conectores
+      </button>
+    </div>
+
+    <div id="msg35" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 36          -->
+<!-- ========================== -->
+<div id="screen36" class="screen">
+  <div class="panel-blanco">
+
+    <h1 class="titulo-final">Escribe una mini historia</h1>
+
+    <p class="instruccion">
+      Escribe una historia de 5 líneas usando: inicio, desarrollo y cierre,
+      utilizando dos conectores.
+    </p>
+
+    <textarea id="texto36" class="area-texto" rows="8"
+      placeholder="Escribe aquí tu historia..."></textarea>
+
+    <br>
+
+    <button class="btn-enviar" onclick="verificar36()">
+      Verificar
+    </button>
+
+    <div id="msg36" class="mensaje"></div>
+
+  </div>
+</div>
+
+<!-- ========================== -->
+<!--       PANTALLA 37          -->
+<!-- ========================== -->
+<div id="screen37" class="screen">
+	
+  <div class="panel-final">
+
+    <h1 class="titulo-final">🎉 ¡Felicidades!</h1>
+    <h2>¡Lo has logrado!</h2>
+    <p class="mensaje-final">¡GRACIAS POR ESTA AVENTURA! 🚀</p>
+
+    <!-- PUNTUACIÓN -->
+    <div class="stats">
+      <div class="stat-box">
+        <p>⭐ Puntuación</p>
+        <h3 id="score37">0</h3>
+      </div>
+
+      <div class="stat-box">
+        <p>Monedas</p>
+        <h3 id="coins37">0 🪙</h3>
+      </div>
+    </div>
+
+    <!-- BARRA DE PROGRESO -->
+    <div class="barra-container">
+      <div id="barra37" class="barra-progreso"></div>
+    </div>
+    <p class="porcentaje">100% completado</p>
+
+  </div>
+
+  <!-- BOTÓN SALIR -->
+  <button class="btn-salir" onclick="salirJuego()">Salir</button>
+</div>
+  <!-- 🔊 SONIDOS DEL JUEGO -->
+	<audio id="soundClick" src="assets/click.mp3"></audio>
+	<audio id="soundCorrect" src="assets/correcto.mp3"></audio>
+	<audio id="soundError" src="assets/error.mp3"></audio>
+	<!-- 🎵 MÚSICA DE FONDO -->
+	<audio id="musicBg" src="assets/fondo.mp3" loop></audio>
+ 
+<script src="js/app.js"></script>
+</body>
+</html>
