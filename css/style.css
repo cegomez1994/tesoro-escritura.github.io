@@ -1438,7 +1438,7 @@
 	}
 
 	/* Cuando se muestra */
-	#msg19.visible {
+	#msg19.visible { 
 	  opacity: 1;
 	}
 
